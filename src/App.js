@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+
+import Minday from './pages/Minday';
+import Librairie from './pages/Librairie';
+import Challenges from './pages/Challenges';
+import Profil from './pages/Profil';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="mobile-wrapper">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Minday />} />
+          <Route path="/librairie" element={<Librairie />} />
+          <Route path="/challenges" element={<Challenges />} />
+          <Route path="/profil" element={<Profil />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
