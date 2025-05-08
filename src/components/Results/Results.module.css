@@ -1,0 +1,89 @@
+
+.container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.medalContainer {
+  margin-bottom: 2rem;
+}
+
+.medal {
+  font-size: 4rem;
+  line-height: 1;
+  animation: bounce 1s ease infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.scoreBoard {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.playerResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playerName {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.playerScore {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: hsl(var(--primary));
+}
+
+.versus {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+
+.winnerIcon {
+  width: 1rem;
+  height: 1rem;
+  color: gold;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.playAgainButton,
+.homeButton {
+  width: 100%;
+}
