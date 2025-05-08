@@ -1,0 +1,58 @@
+
+.container {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.questionText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.answerList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.answerButton {
+  width: 100%;
+  justify-content: space-between;
+  text-align: left;
+  border: 2px solid hsl(var(--border));
+  padding: 1rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  height: auto;
+}
+
+.answerButton:hover {
+  border-color: hsl(var(--primary));
+}
+
+.selectedAnswer {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--primary));
+}
+
+.correctAnswer {
+  background-color: #22c55e;
+  color: white;
+  border-color: #22c55e;
+}
+
+.incorrectAnswer {
+  background-color: hsl(var(--destructive));
+  color: white;
+  border-color: hsl(var(--destructive));
+}
+
+.answerIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
