@@ -1,0 +1,60 @@
+
+.container {
+  padding: 1rem;
+}
+
+.challengeOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.option {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.randomButton {
+  width: 100%;
+}
+
+.divider {
+  text-align: center;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: hsl(var(--border));
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.friendForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin-top: 0.5rem;
+}
+
+.challengeButton {
+  width: 100%;
+  margin-top: 1rem;
+}
