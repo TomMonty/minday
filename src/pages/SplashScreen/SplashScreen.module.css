@@ -1,0 +1,35 @@
+
+.splash {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.splash__logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.splash__subtitle {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+
+.splash__dino {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1.5rem;
+}
+
+.splash__redirect {
+  margin-top: 3rem;
+  color: hsl(var(--primary));
+  text-decoration: none;
+}
