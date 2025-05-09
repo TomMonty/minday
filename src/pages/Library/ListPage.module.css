@@ -1,0 +1,46 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem 0;
+}
+
+.header {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.backButton {
+  padding-left: 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0.75rem 0;
+}
+
+.scrollArea {
+  flex: 1;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.actions {
+  padding: 0 1rem;
+  margin-top: auto;
+}
+
+.exploreButton {
+  width: 100%;
+  background-color: var(--primary);
+  color: white;
+}
