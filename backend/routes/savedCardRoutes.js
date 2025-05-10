@@ -94,9 +94,18 @@ router.post('/', async (req, res) => {
     await savedCard.save();
     console.log('Carte sauvegardée avec succès');
 
-    // Supprimer la carte de la collection cards après sauvegarde
-    await Card.findByIdAndDelete(cardId);
-    console.log('Carte supprimée de la collection cards:', cardId);
+    // Suppression de la carte de la collection cards après sauvegarde
+    try {
+      let cardObjectId = cardId;
+      if (typeof cardId === 'string' && mongoose.Types.ObjectId.isValid(cardId)) {
+        cardObjectId = new mongoose.Types.ObjectId(cardId);
+      }
+      console.log('Suppression de la carte dans cards, id:', cardObjectId, typeof cardObjectId);
+      const deleteResult = await Card.findByIdAndDelete(cardObjectId);
+      console.log('Résultat suppression:', deleteResult);
+    } catch (deleteError) {
+      console.error('Erreur lors de la suppression de la carte dans cards:', deleteError);
+    }
 
     res.status(201).json(savedCard);
   } catch (error) {
@@ -188,6 +197,19 @@ router.get('/user/:userId/category/:category', async (req, res) => {
     res.json(cards);
   } catch (error) {
     console.error('Erreur dans /user/:userId/category/:category:', error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const savedCard = await SavedCard.findById(req.params.id);
+    if (!savedCard) {
+      return res.status(404).json({ message: 'Carte sauvegardée non trouvée' });
+    }
+    res.json(savedCard);
+  } catch (error) {
+    console.error('Erreur lors de la récupération de la carte sauvegardée:', error);
     res.status(500).json({ message: error.message });
   }
 });

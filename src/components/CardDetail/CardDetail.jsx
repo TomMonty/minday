@@ -33,7 +33,6 @@ const CardDetail = ({ card }) => {
           <h1 className={styles.title}>{card.title}</h1>
           <h2 className={styles.subtitle}>{card.subtitle}</h2>
           <div className={styles.description}>
-            <h3>Description complète :</h3>
             <p>{card.fullDescription}</p>
           </div>
           <div className={styles.category}>
