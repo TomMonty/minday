@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import Layout from './components/Layout/Layout';
@@ -11,6 +11,7 @@ import Challenges from './pages/Challenges/Challenges';
 import ChallengeLobby from './pages/Challenges/ChallengeLobby';
 import ChallengeGame from './pages/Challenges/ChallengeGame';
 import Profile from './pages/Profile/Profile';
+import CardDetailPage from './pages/CardDetail/CardDetailPage';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,8 +29,8 @@ const App = () => {
               <Route path="/" element={<SplashScreen />} />
               <Route path="/home" element={<Layout><Home /></Layout>} />
               <Route path="/library" element={<Layout><Library /></Layout>} />
-              <Route path="/library/:cat" element={<Layout><ListPage /></Layout>} />
-              <Route path="/library/:cat/:id" element={<Layout><DetailPage /></Layout>} />
+              <Route path="/library/:category" element={<Layout><ListPage /></Layout>} />
+              <Route path="/card/:id" element={<Layout><CardDetailPage /></Layout>} />
               <Route path="/challenges" element={<Layout><Challenges /></Layout>} />
               <Route path="/challenges/lobby" element={<Layout><ChallengeLobby /></Layout>} />
               <Route path="/challenges/:roomId" element={<Layout><ChallengeGame /></Layout>} />

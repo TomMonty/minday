@@ -1,4 +1,3 @@
-
 import React from 'react';
 import CategoryGrid from '@/components/CategoryGrid/CategoryGrid';
 import { useApp } from '@/context/AppContext';
@@ -8,11 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Library = () => {
   const { state } = useApp();
-  const { categories, cards } = state;
+  const { savedCards } = state;
   const navigate = useNavigate();
   
-  // Check if the user has explicitly saved any cards
-  const hasSavedCards = cards.some(card => card.savedAt);
+  // Check if the user has any saved cards
+  const hasSavedCards = savedCards.length > 0;
+
+  console.log('État dans Library:', state);
+  console.log('Catégories:', state.categories);
+  console.log('Cartes sauvegardées:', state.savedCards);
 
   return (
     <div>
@@ -34,7 +37,7 @@ const Library = () => {
           </Button>
         </div>
       ) : (
-        <CategoryGrid categories={categories} />
+        <CategoryGrid />
       )}
     </div>
   );

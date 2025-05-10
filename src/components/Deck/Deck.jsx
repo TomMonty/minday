@@ -44,8 +44,8 @@ const Deck = ({ cards }) => {
     // Store the current state in sessionStorage before navigating
     sessionStorage.setItem('returnToHome', 'true');
     
-    // Navigate to card details with category determined by card content
-    navigate(`/library/histoire/${id}`);
+    // Navigate to card details
+    navigate(`/card/${id}`);
   };
 
   const handlePrevious = () => {

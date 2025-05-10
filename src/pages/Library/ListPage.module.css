@@ -1,9 +1,7 @@
-
 .container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 1rem 0;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header {
@@ -16,9 +14,16 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
-  margin: 0.75rem 0;
+  margin: 0 0 0.5rem 0;
+  color: #1a1a1a;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 2rem 0;
 }
 
 .scrollArea {
@@ -27,11 +32,17 @@
   margin-bottom: 1rem;
 }
 
-.cardsGrid {
+.cardGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1rem;
-  padding-bottom: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.cardWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .actions {
@@ -43,4 +54,11 @@
   width: 100%;
   background-color: var(--primary);
   color: white;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.125rem;
 }
