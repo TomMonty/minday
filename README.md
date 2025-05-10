@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Min.day
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Cloner le projet
 
-## Available Scripts
+```bash
+git clone https://github.com/ton-utilisateur/minday.git
+cd minday
+```
 
-In the project directory, you can run:
+## 2. Installer les dépendances
 
-### `npm start`
+```bash
+# Backend
+cd backend
+npm install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Frontend
+cd ../frontend
+npm install
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 3. Configuration des variables d'environnement
 
-### `npm test`
+Crée un fichier `.env` dans le dossier `backend` avec le contenu suivant :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+GOOGLE_API_KEY=your_google_api_key
+```
 
-### `npm run build`
+- Remplace `your_mongodb_connection_string` par l'URI de ta base MongoDB (Atlas ou locale).
+- Remplace `your_google_api_key` par ta clé API Google si tu utilises la génération automatique de cartes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 4. Création de la base de données
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La base de données et les collections seront créées automatiquement au premier lancement du backend et lors de la génération de cartes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 5. Génération de cartes (remplir la base)
 
-### `npm run eject`
+Pour générer automatiquement des cartes dans la base (collection `cards`), utilise le script suivant :
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+cd backend
+node generateCards.js
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Ce script va générer des cartes thématiques et les insérer dans la collection `cards`.
+- Tu peux relancer ce script à tout moment pour régénérer des cartes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 6. Lancer le projet
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Backend
 
-## Learn More
+Dans le dossier `backend` :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm start
+# ou
+node server.js
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Le backend sera accessible sur [http://localhost:5000](http://localhost:5000).
 
-### Code Splitting
+### Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Dans le dossier `frontend` :
 
-### Analyzing the Bundle Size
+```bash
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Le frontend sera accessible sur [http://localhost:5173](http://localhost:5173) (ou le port affiché dans le terminal).
 
-### Making a Progressive Web App
+## 7. Utilisation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Accueil** : Découvre des cartes mélangées de toutes les catégories.
+- **Sauvegarde** : Clique sur l'étoile d'une carte pour la sauvegarder dans ta bibliothèque (elle sera retirée de la Home).
+- **Bibliothèque** : Accède à toutes tes cartes sauvegardées, classées par catégorie.
+- **Défis** : Lance des défis sur les cartes de ta bibliothèque.
+- **Profil** : Consulte tes statistiques et ton profil.
 
-### Advanced Configuration
+## 8. Astuces & Dépannage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Si tu veux régénérer toutes les cartes, relance simplement `node generateCards.js` dans le dossier backend.
+- Si tu modifies le backend, pense à le redémarrer.
+- Pour toute erreur de connexion à MongoDB, vérifie bien la variable `MONGODB_URI` dans le `.env`.
 
-### Deployment
+## 9. Structure du projet
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+minday/
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── generateCards.js
+│   ├── server.js
+│   └── ...
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── ...
+└── README.md
+```
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 10. Contact
+
+Pour toute question ou problème, contactes l'auteur du projet ou ouvre une issue sur le dépôt GitHub.
+
+Bon test et bonne découverte de Minday !

@@ -1,0 +1,71 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+  padding: 24px 20px 20px 20px;
+  min-height: 120px;
+  min-width: 160px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.categoryCard:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0.12);
+}
+
+.icon {
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.count {
+  color: #fff;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.histoire {
+  background: #e74c3c;
+}
+.sciences {
+  background: #27ae60;
+}
+.geographie {
+  background: #2980d9;
+}
+.art {
+  background: #e0569b;
+}
+.medias {
+  background: #8e44ad;
+}
+.sports {
+  background: #f4b63d;
+  color: #fff;
+}
