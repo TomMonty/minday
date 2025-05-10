@@ -20,6 +20,7 @@ app.use('/api/facts', require('./routes/factRoutes'));
 app.use('/api/quiz', require('./routes/quizRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/services', require('./routes/services'));
+app.use('/api/saved-cards', require('./routes/savedCardRoutes'));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

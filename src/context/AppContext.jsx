@@ -15,6 +15,7 @@ const mockCategories = [
 // Initial state
 const initialState = {
   cards: [],
+  savedCards: [],
   cardsCompletedToday: 0,
   categories: [],
   challenges: [],
@@ -27,6 +28,8 @@ const cardsReducer = (state, action) => {
   switch (action.type) {
     case 'LOAD_CARDS':
       return { ...state, cards: action.payload };
+    case 'LOAD_SAVED_CARDS':
+      return { ...state, savedCards: action.payload };
     case 'COMPLETE_CARD': {
       const updatedCards = state.cards.map(card =>
         card._id === action.payload.id
@@ -57,12 +60,16 @@ const cardsReducer = (state, action) => {
       };
     }
     case 'SAVE_CARD': {
-      const updatedCards = state.cards.map(card =>
-        card._id === action.payload.id
-          ? { ...card, savedAt: new Date().toISOString() }
-          : card
+      return { 
+        ...state, 
+        savedCards: [...state.savedCards, action.payload.card]
+      };
+    }
+    case 'REMOVE_SAVED_CARD': {
+      const updatedSavedCards = state.savedCards.filter(
+        card => card._id !== action.payload.id
       );
-      return { ...state, cards: updatedCards };
+      return { ...state, savedCards: updatedSavedCards };
     }
     case 'RESET_DAILY':
       return { ...state, cardsCompletedToday: 0 };
@@ -145,6 +152,7 @@ const appReducer = (state, action) => {
     case 'LOAD_CARDS':
     case 'COMPLETE_CARD':
     case 'SAVE_CARD':
+    case 'REMOVE_SAVED_CARD':
     case 'RESET_DAILY':
       return cardsReducer(state, action);
 
@@ -188,11 +196,30 @@ export const AppProvider = ({ children }) => {
         console.log('Réponse des cartes:', cardsRes.data);
         console.log('Réponse de l\'utilisateur:', userRes.data);
 
+        // Charger les cartes sauvegardées seulement si l'utilisateur existe
+        let savedCardsRes;
+        if (userRes.data._id) {
+          try {
+            savedCardsRes = await axios.get(`http://localhost:5000/api/saved-cards/user/${userRes.data._id}`);
+            console.log('Réponse des cartes sauvegardées:', savedCardsRes.data);
+          } catch (error) {
+            console.error('Erreur lors du chargement des cartes sauvegardées:', error);
+            savedCardsRes = { data: [] };
+          }
+        }
+
+        // Mettre à jour les catégories avec le nombre réel de cartes sauvegardées
+        const updatedCategories = mockCategories.map(category => {
+          const count = savedCardsRes?.data?.filter(card => card.category === category.slug).length || 0;
+          return { ...category, count };
+        });
+
         dispatch({
           type: 'HYDRATE',
           payload: {
             cards: cardsRes.data,
-            categories: mockCategories,
+            savedCards: savedCardsRes?.data || [],
+            categories: updatedCategories,
             userProfile: userRes.data,
             challenges: [],
             cardsCompletedToday: 0,
@@ -206,6 +233,25 @@ export const AppProvider = ({ children }) => {
 
     loadInitialData();
   }, []);
+
+  useEffect(() => {
+    const fetchSavedCards = async () => {
+      try {
+        if (!state.userProfile?._id) {
+          console.log('Pas d\'utilisateur connecté, impossible de charger les cartes sauvegardées');
+          return;
+        }
+        console.log('Chargement des cartes sauvegardées pour l\'utilisateur:', state.userProfile._id);
+        const response = await axios.get(`http://localhost:5000/api/saved-cards/user/${state.userProfile._id}`);
+        console.log('Réponse du serveur pour les cartes sauvegardées:', response.data);
+        dispatch({ type: 'LOAD_SAVED_CARDS', payload: response.data });
+      } catch (error) {
+        console.error('Erreur lors du chargement des cartes sauvegardées:', error);
+      }
+    };
+
+    fetchSavedCards();
+  }, [state.userProfile?._id]);
 
   const checkDayReset = () => {
     const today = new Date().toDateString();
@@ -239,25 +285,18 @@ export const AppProvider = ({ children }) => {
   }, [state.cards]);
 
   const getLibraryByCategory = useCallback((categorySlug) => {
-    const savedCards = state.cards.filter(card => card.savedAt);
-
     if (!categorySlug || categorySlug === 'all') {
-      return savedCards;
+      return state.cards;
     }
-
-    const categoryMap = {
-      'histoire': ['1', '5'],
-      'sciences': ['2'],
-      'geographie': ['3'],
-      'art': ['4'],
-      'medias': [],
-      'sports': []
-    };
-
-    const cardIds = categoryMap[categorySlug] || [];
-
-    return savedCards.filter(card => cardIds.includes(card._id));
+    return state.cards.filter(card => card.category === categorySlug);
   }, [state.cards]);
+
+  const getSavedCardsByCategory = useCallback((categorySlug) => {
+    if (!categorySlug || categorySlug === 'all') {
+      return state.savedCards;
+    }
+    return state.savedCards.filter(card => card.category === categorySlug);
+  }, [state.savedCards]);
 
   const getStreak = useCallback(() => {
     return state.userProfile?.stats?.dayStreak || 0;
@@ -268,9 +307,37 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: 'COMPLETE_CARD', payload: { id } });
   }, []);
 
-  const saveCard = useCallback((id) => {
-    dispatch({ type: 'SAVE_CARD', payload: { id } });
-  }, []);
+  const saveCard = useCallback(async (id) => {
+    try {
+      console.log('Sauvegarde de la carte:', id);
+      console.log('ID de l\'utilisateur:', state.userProfile._id);
+
+      const response = await axios.post('http://localhost:5000/api/saved-cards', {
+        cardId: id,
+        userId: state.userProfile._id
+      });
+      
+      console.log('Réponse de la sauvegarde:', response.data);
+
+      dispatch({ 
+        type: 'SAVE_CARD', 
+        payload: { 
+          card: response.data
+        } 
+      });
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde de la carte:', error);
+    }
+  }, [state.userProfile._id]);
+
+  const removeSavedCard = useCallback(async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/saved-cards/${id}/user/${state.userProfile._id}`);
+      dispatch({ type: 'REMOVE_SAVED_CARD', payload: { id } });
+    } catch (error) {
+      console.error('Erreur lors de la suppression de la carte:', error);
+    }
+  }, [state.userProfile._id]);
 
   const updateUserProfile = useCallback((updates) => {
     dispatch({ type: 'UPDATE_USER', payload: updates });
@@ -295,9 +362,11 @@ export const AppProvider = ({ children }) => {
     dispatch,
     getTodayCards,
     getLibraryByCategory,
+    getSavedCardsByCategory,
     getStreak,
     completeCard,
     saveCard,
+    removeSavedCard,
     updateUserProfile,
     startChallenge,
     endChallenge,
@@ -306,9 +375,11 @@ export const AppProvider = ({ children }) => {
     state,
     getTodayCards,
     getLibraryByCategory,
+    getSavedCardsByCategory,
     getStreak,
     completeCard,
     saveCard,
+    removeSavedCard,
     updateUserProfile,
     startChallenge,
     endChallenge
