@@ -17,11 +17,9 @@ const ChallengeLobby = () => {
   const { state } = useApp();
   const { cards } = state;
   
-  // Get cardId from query params if available
   const queryParams = new URLSearchParams(location.search);
   const cardId = queryParams.get('cardId');
   
-  // Get card title if cardId is available
   const cardTitle = cardId ? cards.find(card => card.id === cardId)?.title : null;
   
   useEffect(() => {
