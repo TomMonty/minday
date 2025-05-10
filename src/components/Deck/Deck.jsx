@@ -107,6 +107,8 @@ const Deck = ({ cards }) => {
   const currentCard = cards[currentIndex];
   const canGoBack = history.length > 0;
   
+  console.log('Current card:', currentCard); // Log de la carte courante
+  
   return (
     <div className={styles.deck}>
       {showProgress && (
@@ -120,16 +122,18 @@ const Deck = ({ cards }) => {
       
       <div className={styles.deck__cardContainer}>
         <AnimatePresence mode="wait">
-          <Card
-            key={currentCard.id}
-            id={currentCard.id}
-            title={currentCard.title}
-            subtitle={currentCard.subtitle}
-            image={currentCard.image}
-            onReject={handleReject}
-            onSave={handleSave}
-            onMore={handleMore}
-          />
+          {currentCard && (
+            <Card
+              key={currentCard._id || currentCard.id}
+              id={currentCard._id || currentCard.id}
+              title={currentCard.title}
+              subtitle={currentCard.subtitle}
+              imageUrl={currentCard.imageUrl}
+              onReject={handleReject}
+              onSave={handleSave}
+              onMore={handleMore}
+            />
+          )}
         </AnimatePresence>
       </div>
       

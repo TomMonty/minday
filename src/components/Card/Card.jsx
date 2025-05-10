@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
 import { ChevronRight, X, Check } from "lucide-react";
 
-const Card = ({ id, title, subtitle, image, onReject, onSave, onMore }) => {
+const Card = ({ id, title, subtitle, imageUrl, onReject, onSave, onMore }) => {
+  console.log('Card props:', { id, title, subtitle, imageUrl }); // Log des props
+
   return (
     <motion.div 
       className={styles.card}
@@ -25,7 +27,15 @@ const Card = ({ id, title, subtitle, image, onReject, onSave, onMore }) => {
       }}
     >
       <div className={styles.card__imageContainer}>
-        <img src={image} alt={title} className={styles.card__image} />
+        <img 
+          src={imageUrl} 
+          alt={title} 
+          className={styles.card__image}
+          onError={(e) => {
+            console.error('Error loading image:', imageUrl);
+            e.target.src = 'https://via.placeholder.com/400x300?text=Image+non+disponible';
+          }}
+        />
       </div>
       <div className={styles.card__content}>
         <h3 className={styles.card__title}>{title}</h3>
@@ -65,7 +75,7 @@ Card.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
   onReject: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onMore: PropTypes.func.isRequired

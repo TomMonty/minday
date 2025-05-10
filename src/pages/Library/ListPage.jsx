@@ -43,10 +43,10 @@ const ListPage = () => {
         <div className={styles.cardsGrid}>
           {categoryItems.map(item => (
             <MiniCard 
-              key={item.id}
-              id={item.id}
+              key={item._id || item.id}
+              id={item._id || item.id}
               title={item.title}
-              image={item.image}
+              imageUrl={item.imageUrl}
               category={cat || 'default'}
             />
           ))}
