@@ -38,7 +38,7 @@ const MiniCard = ({ card }) => {
   };
 
   const handleClick = () => {
-    navigate(`/card/${card.cardId}`);
+    navigate(`/library/detail/${card._id}`);
   };
 
   return (
