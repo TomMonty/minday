@@ -7,7 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import axios from 'axios';
 
 const DetailPage = () => {
-  const { id, cat } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   
   const [article, setArticle] = useState(null);
@@ -49,8 +49,10 @@ const DetailPage = () => {
   const handleBack = () => {
     if (returnToHome) {
       navigate('/home');
+    } else if (article) {
+      navigate(`/library/${article.category.toLowerCase()}`);
     } else {
-      navigate(`/library/${cat}`);
+      navigate('/library');
     }
   };
 

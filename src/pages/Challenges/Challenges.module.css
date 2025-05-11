@@ -1,0 +1,110 @@
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: hsl(var(--foreground));
+}
+
+.leaderboardContainer {
+  background-color: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+}
+
+.leaderboardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 1.5rem;
+}
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.leaderboardItem {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: hsl(var(--muted) / 0.3);
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.leaderboardItem:hover {
+  transform: translateX(4px);
+}
+
+.rank {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(var(--primary));
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.userInfo {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.username {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.score {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: hsl(var(--primary));
+}
+
+.challengeButtonContainer {
+  margin-top: auto;
+  padding: 1rem 0;
+}
+
+.challengeButton {
+  width: 100%;
+  height: 3.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: hsl(var(--primary));
+  color: white;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.challengeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+} 
