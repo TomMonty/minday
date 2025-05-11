@@ -78,36 +78,32 @@ const ChallengeLobby = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className="text-2xl font-bold mb-6">Défier un ami</h1>
+      <h1 className={styles.title}>Défier un ami</h1>
       
       {cardTitle && (
-        <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-blue-800">Sujet: <strong>{cardTitle}</strong></p>
+        <div className={styles.subjectContainer}>
+          <div className={styles.subjectLabel}>Sujet sélectionné</div>
+          <div className={styles.subjectTitle}>{cardTitle}</div>
         </div>
       )}
       
-      <div className="mb-6">
-        <h2 className="text-lg font-medium mb-2">Choisissez un mode de jeu</h2>
+      <div className={styles.tabsContainer}>
         <Tabs defaultValue={challengeMode} onValueChange={(value) => setChallengeMode(value)}>
-          <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="knowledge" className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4" />
+          <TabsList className={styles.tabsList}>
+            <TabsTrigger value="knowledge" className={styles.tabsTrigger}>
+              <BookOpen className="w-4 h-4 mr-2" />
               <span>Mes connaissances</span>
             </TabsTrigger>
-            <TabsTrigger value="random" className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4" />
+            <TabsTrigger value="random" className={styles.tabsTrigger}>
+              <Sparkles className="w-4 h-4 mr-2" />
               <span>Sujets aléatoires</span>
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="knowledge">
-            <p className="text-sm text-muted-foreground mb-4">
-              Testez vos connaissances avec des questions basées sur votre bibliothèque personnelle.
-            </p>
+          <TabsContent value="knowledge" className={styles.tabsContent}>
+            Testez vos connaissances avec des questions basées sur votre bibliothèque personnelle.
           </TabsContent>
-          <TabsContent value="random">
-            <p className="text-sm text-muted-foreground mb-4">
-              Affrontez vos amis sur des sujets variés et aléatoires.
-            </p>
+          <TabsContent value="random" className={styles.tabsContent}>
+            Affrontez vos amis sur des sujets variés et aléatoires.
           </TabsContent>
         </Tabs>
       </div>
@@ -120,7 +116,7 @@ const ChallengeLobby = () => {
             variant="secondary"
             size="lg"
           >
-            <Users className="mr-2" />
+            <Users className="w-5 h-5 mr-2" />
             Match aléatoire
           </Button>
         </div>
@@ -129,7 +125,7 @@ const ChallengeLobby = () => {
         
         <div className={styles.option}>
           <form onSubmit={handleFriendChallenge} className={styles.friendForm}>
-            <div className="mb-4">
+            <div>
               <Label htmlFor="username">Nom d'ami</Label>
               <Input
                 id="username"
@@ -141,7 +137,7 @@ const ChallengeLobby = () => {
               />
             </div>
             <Button type="submit" className={styles.challengeButton}>
-              <User className="mr-2" />
+              <User className="w-5 h-5 mr-2" />
               Défier cet ami
             </Button>
           </form>
