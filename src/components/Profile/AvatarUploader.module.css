@@ -1,8 +1,7 @@
-
 .container {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
 }
 
 .avatarWrapper {
@@ -11,16 +10,27 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
+  background-color: hsl(var(--muted));
 }
 
 .avatar {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.avatar img {
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover;
 }
 
 .editable {
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.editable:hover {
+  transform: scale(1.05);
 }
 
 .editable:hover::after {
@@ -36,17 +46,27 @@
 
 .cameraButton {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: hsl(var(--primary));
   color: white;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  border: 2px solid white;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.editable:hover .cameraButton {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .hiddenInput {

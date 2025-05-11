@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 
 const Profile = () => {
   const { state, updateUserProfile, getStreak } = useApp();
-  const { userProfile } = state;
+  const { userProfile, savedCards } = state;
   const dayStreak = getStreak();
   
   const [isEditing, setIsEditing] = useState(false);
@@ -69,13 +69,13 @@ const Profile = () => {
       <div className={styles.statsContainer}>
         <Card className={styles.statCard}>
           <BookOpen className={styles.statIcon} />
-          <div className={styles.statValue}>{userProfile?.cardsLearned || 124}</div>
+          <div className={styles.statValue}>{savedCards?.length || 0}</div>
           <div className={styles.statLabel}>Cards Learned</div>
         </Card>
         
         <Card className={styles.statCard}>
           <Trophy className={styles.statIcon} />
-          <div className={styles.statValue}>{userProfile?.challengesWon || 15}</div>
+          <div className={styles.statValue}>{userProfile?.challengesWon || 0}</div>
           <div className={styles.statLabel}>Challenges Won</div>
         </Card>
         

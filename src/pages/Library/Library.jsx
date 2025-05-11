@@ -4,6 +4,7 @@ import { useApp } from '@/context/AppContext';
 import { Button } from '@/components/ui/button';
 import { BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import styles from './Library.module.css';
 
 const Library = () => {
   const { state } = useApp();
@@ -18,18 +19,16 @@ const Library = () => {
   console.log('Cartes sauvegardées:', state.savedCards);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">Votre Bibliothèque</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Votre Bibliothèque</h1>
       
       {!hasSavedCards ? (
-        <div className="text-center py-8">
-          <div className="flex justify-center mb-4">
-            <div className="bg-gray-100 p-4 rounded-full">
-              <BookOpen className="w-8 h-8 text-primary" />
-            </div>
+        <div className={styles.emptyState}>
+          <div className={styles.emptyStateIcon}>
+            <BookOpen className="w-8 h-8 text-primary" />
           </div>
-          <h2 className="text-lg font-medium mb-2">Votre bibliothèque est vide</h2>
-          <p className="text-muted-foreground mb-6">
+          <h2 className={styles.emptyStateTitle}>Votre bibliothèque est vide</h2>
+          <p className={styles.emptyStateDescription}>
             Découvrez des cartes dans l'accueil et sauvegardez-les pour les ajouter à votre bibliothèque
           </p>
           <Button onClick={() => navigate('/home')}>

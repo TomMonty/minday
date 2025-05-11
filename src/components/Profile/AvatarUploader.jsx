@@ -41,7 +41,7 @@ const AvatarUploader = ({ currentAvatar, onAvatarChange, isEditable }) => {
         
         {isEditable && (
           <div className={styles.cameraButton}>
-            <Camera size={16} />
+            <Camera size={20} />
           </div>
         )}
       </div>
