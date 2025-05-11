@@ -11,11 +11,11 @@ cd minday
 
 ```bash
 # Backend
-cd backend
+cd minday/backend
 npm install
 
 # Frontend
-cd ../frontend
+cd minday
 npm install
 ```
 
@@ -26,15 +26,18 @@ Crée un fichier `.env` dans le dossier `backend` avec le contenu suivant :
 ```
 MONGODB_URI=your_mongodb_connection_string
 PORT=5000
-GOOGLE_API_KEY=your_google_api_key
 ```
 
-- Remplace `your_mongodb_connection_string` par l'URI de ta base MongoDB (Atlas ou locale).
-- Remplace `your_google_api_key` par ta clé API Google si tu utilises la génération automatique de cartes.
+- Remplace `your_mongodb_connection_string` par l'URI de ta base MongoDB Atlas.
 
 ## 4. Création de la base de données
 
-La base de données et les collections seront créées automatiquement au premier lancement du backend et lors de la génération de cartes.
+Pas besoin de télécharger quoi que ce soit il faut créer son compte en ligne créer une database minday ou comme vous voulez créer 3 collections : cards, savecards et users et rentrer ces infos dans la collection user :
+
+```
+
+{"_id":{"$oid":"681f6793ad8c711b1fa2fd1b"},"name":"Default User","bio":"Welcome to Minday!","location":"Earth","avatarUrl":"/default-avatar.png","preferences":{"dailyCardCount":{"$numberInt":"5"},"categories":["histoire","sciences","geographie","art"],"notifications":true},"stats":{"cardsLearned":{"$numberInt":"0"},"challengesWon":{"$numberInt":"0"},"dayStreak":{"$numberInt":"0"}},"__v":{"$numberInt":"0"}}
+```
 
 ## 5. Génération de cartes (remplir la base)
 
@@ -55,27 +58,22 @@ node generateCards.js
 Dans le dossier `backend` :
 
 ```bash
-npm start
-# ou
-node server.js
+npm run dev
 ```
 
 Le backend sera accessible sur [http://localhost:5000](http://localhost:5000).
 
 ### Frontend
 
-Dans le dossier `frontend` :
+Dans le dossier du projet `minday` :
 
 ```bash
 npm run dev
 ```
 
-Le frontend sera accessible sur [http://localhost:5173](http://localhost:5173) (ou le port affiché dans le terminal).
-
 ## 7. Utilisation
 
 - **Accueil** : Découvre des cartes mélangées de toutes les catégories.
-- **Sauvegarde** : Clique sur l'étoile d'une carte pour la sauvegarder dans ta bibliothèque (elle sera retirée de la Home).
 - **Bibliothèque** : Accède à toutes tes cartes sauvegardées, classées par catégorie.
 - **Défis** : Lance des défis sur les cartes de ta bibliothèque.
 - **Profil** : Consulte tes statistiques et ton profil.
@@ -83,30 +81,8 @@ Le frontend sera accessible sur [http://localhost:5173](http://localhost:5173) (
 ## 8. Astuces & Dépannage
 
 - Si tu veux régénérer toutes les cartes, relance simplement `node generateCards.js` dans le dossier backend.
-- Si tu modifies le backend, pense à le redémarrer.
-- Pour toute erreur de connexion à MongoDB, vérifie bien la variable `MONGODB_URI` dans le `.env`.
+- Si tu modifies le backend, penses à le redémarrer.
+- Pour toute erreur de connexion à MongoDB, vérifie bien la variable `MONGO_URI` dans le `.env`.
 
-## 9. Structure du projet
 
-```
-minday/
-├── backend/
-│   ├── models/
-│   ├── routes/
-│   ├── generateCards.js
-│   ├── server.js
-│   └── ...
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── ...
-└── README.md
-```
-
----
-
-## 10. Contact
-
-Pour toute question ou problème, contactes l'auteur du projet ou ouvre une issue sur le dépôt GitHub.
-
-Bon test et bonne découverte de Minday !
+## 9. Bonne Chance ....
