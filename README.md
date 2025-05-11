@@ -24,7 +24,7 @@ npm install
 Crée un fichier `.env` dans le dossier `backend` avec le contenu suivant :
 
 ```
-MONGODB_URI=your_mongodb_connection_string
+MONGO_URI=your_mongodb_connection_string
 PORT=5000
 ```
 
