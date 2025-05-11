@@ -32,7 +32,7 @@ PORT=5000
 
 ## 4. Création de la base de données
 
-Pas besoin de télécharger quoi que ce soit il faut créer son compte en ligne créer une database minday ou comme vous voulez créer 3 collections : cards, savecards et users et rentrer ces infos dans la collection user :
+Pas besoin de télécharger quoi que ce soit il faut créer son compte en ligne créer une database minday ou comme vous voulez créer 3 collections : `cards`, `savedcards` et `users` et rentrer ces infos dans la collection `users` :
 
 ```
 
@@ -83,6 +83,5 @@ npm run dev
 - Si tu veux régénérer toutes les cartes, relance simplement `node generateCards.js` dans le dossier backend.
 - Si tu modifies le backend, penses à le redémarrer.
 - Pour toute erreur de connexion à MongoDB, vérifie bien la variable `MONGO_URI` dans le `.env`.
-
 
 ## 9. Bonne Chance ....
